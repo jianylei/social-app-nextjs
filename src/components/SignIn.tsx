@@ -10,8 +10,8 @@ const SignIn: FC = () => {
         <Icons.logo className="mx-auto h-5 w-6" />
         <h1 className="text-2xl font-semibold tracking-tight">Welcome Back</h1>
         <p className="text-sm max-w-xs mx-auto">
-          By continuing, you are setting up an AppName account and agree to out User Agreement and
-          Privacy Policy
+          By continuing, you are setting up an AppName account and agree to out
+          User Agreement and Privacy Policy
         </p>
 
         <UserAuthForm />

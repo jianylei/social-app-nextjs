@@ -1,5 +1,6 @@
 'use client';
 
+import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 
 const Page = () => {
@@ -23,6 +24,11 @@ const Page = () => {
             <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400">
               r/
             </p>
+            <Input
+              className="pl-6"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
           </div>
         </div>
       </div>
