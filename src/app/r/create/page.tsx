@@ -14,6 +14,7 @@ const Page = () => {
   const [input, setInput] = useState<string>('')
   const router = useRouter()
   const { loginToast } = useCustomToast()
+  const regex = /^[a-zA-Z0-9_]{3,21}$/
 
   const { mutate: createCommunity, isLoading } = useMutation({
     mutationFn: async () => {
@@ -25,6 +26,7 @@ const Page = () => {
       return data as string
     },
     onError: (err) => {
+      console.log(err)
       if (err instanceof AxiosError) {
         if (err.response?.status === 409) {
           return toast({
@@ -91,8 +93,17 @@ const Page = () => {
           <Button
             isLoading={isLoading}
             disabled={input.length === 0}
-            onClick={() => createCommunity()}
-          >
+            onClick={() => {
+              if (!regex.test(input)) {
+                return toast({
+                  title: 'Error',
+                  description:
+                    'Community names must be between 3–21 characters, and can only contain letters, numbers, or underscores.',
+                  variant: 'destructive'
+                })
+              }
+              createCommunity()
+            }}>
             Create Community
           </Button>
         </div>

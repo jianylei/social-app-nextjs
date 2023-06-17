@@ -1,6 +1,5 @@
 import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { PageProps } from '../../../../.next/types/app/layout'
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config'
 import { notFound } from 'next/navigation'
 import MiniCreatePost from '@/components/MiniCreatePost'
@@ -11,7 +10,7 @@ interface pageProps {
   }
 }
 
-const page = async ({ params }: PageProps) => {
+const page = async ({ params }: pageProps) => {
   const { slug } = params
 
   const session = await getAuthSession()
