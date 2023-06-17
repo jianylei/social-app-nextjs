@@ -1,5 +1,5 @@
-import CloseModal from '@/components/CloseModal';
-import SignUp from '@/components/Signup';
+import CloseModal from '@/components/CloseModal'
+import SignUp from '@/components/Signup'
 
 const page = ({}) => {
   return (
@@ -14,7 +14,7 @@ const page = ({}) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page

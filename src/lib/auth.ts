@@ -1,8 +1,8 @@
-import { NextAuthOptions, getServerSession } from 'next-auth';
-import { db } from './db';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import GoogleProvider from 'next-auth/providers/google';
-import { nanoid } from 'nanoid';
+import { NextAuthOptions, getServerSession } from 'next-auth'
+import { db } from './db'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import GoogleProvider from 'next-auth/providers/google'
+import { nanoid } from 'nanoid'
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -21,25 +21,25 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ token, session }) {
       if (token) {
-        session.user.id = token.id;
-        session.user.name = token.name;
-        session.user.email = token.email;
-        session.user.image = token.picture;
-        session.user.username = token.username;
+        session.user.id = token.id
+        session.user.name = token.name
+        session.user.email = token.email
+        session.user.image = token.picture
+        session.user.username = token.username
       }
 
-      return session;
+      return session
     },
     async jwt({ token, user }) {
       const dbUser = await db.user.findFirst({
         where: {
           email: token.email
         }
-      });
+      })
 
       if (!dbUser) {
-        token.id = user!.id;
-        return token;
+        token.id = user!.id
+        return token
       }
 
       if (!dbUser.username) {
@@ -50,7 +50,7 @@ export const authOptions: NextAuthOptions = {
           data: {
             username: nanoid(10)
           }
-        });
+        })
       }
 
       return {
@@ -59,12 +59,12 @@ export const authOptions: NextAuthOptions = {
         email: dbUser.email,
         picture: dbUser.image,
         username: dbUser.username
-      };
+      }
     },
     redirect() {
-      return '/';
+      return '/'
     }
   }
-};
+}
 
-export const getAuthSession = () => getServerSession(authOptions);
+export const getAuthSession = () => getServerSession(authOptions)

@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/Button';
-import SignIn from '@/components/SignIn';
-import { ChevronLeft } from 'lucide-react';
+import { FC } from 'react'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/components/ui/Button'
+import SignIn from '@/components/SignIn'
+import { ChevronLeft } from 'lucide-react'
 
 const page: FC = () => {
   return (
@@ -23,7 +23,7 @@ const page: FC = () => {
         <SignIn />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page

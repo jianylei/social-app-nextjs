@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { Icons } from './Icons';
-import Link from 'next/link';
-import UserAuthForm from './UserAuthForm';
+import { FC } from 'react'
+import { Icons } from './Icons'
+import Link from 'next/link'
+import UserAuthForm from './UserAuthForm'
 
 const SignUp: FC = () => {
   return (
@@ -27,7 +27,7 @@ const SignUp: FC = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

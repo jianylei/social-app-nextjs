@@ -1,20 +1,20 @@
-'use client';
+'use client'
 
-import { User } from 'next-auth';
-import { FC } from 'react';
+import { User } from 'next-auth'
+import { FC } from 'react'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from './ui/DropdownMenu';
-import UserAvatar from './UserAvatar';
-import Link from 'next/link';
-import { signOut } from 'next-auth/react';
+} from './ui/DropdownMenu'
+import UserAvatar from './UserAvatar'
+import Link from 'next/link'
+import { signOut } from 'next-auth/react'
 
 interface UserAccountNavProps {
-  user: Pick<User, 'name' | 'image' | 'email'>;
+  user: Pick<User, 'name' | 'image' | 'email'>
 }
 
 const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
@@ -60,11 +60,11 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
 
         <DropdownMenuItem
           onSelect={(e) => {
-            e.preventDefault();
+            e.preventDefault()
 
             signOut({
               callbackUrl: `${window.location.origin}/sign-in`
-            });
+            })
           }}
           className="cursor-pointer"
         >
@@ -72,7 +72,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
-};
+  )
+}
 
-export default UserAccountNav;
+export default UserAccountNav

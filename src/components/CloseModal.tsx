@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { Button } from './ui/Button';
-import { X } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Button } from './ui/Button'
+import { X } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 const CloseModal = () => {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <Button
@@ -16,7 +16,7 @@ const CloseModal = () => {
     >
       <X className="h-4 w-4" />
     </Button>
-  );
-};
+  )
+}
 
-export default CloseModal;
+export default CloseModal

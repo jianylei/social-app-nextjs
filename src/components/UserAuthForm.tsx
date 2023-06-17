@@ -1,35 +1,35 @@
-'use client';
+'use client'
 
-import * as React from 'react';
-import { FC } from 'react';
-import { Button } from './ui/Button';
-import { cn } from '@/lib/utils';
-import { signIn } from 'next-auth/react';
-import { Icons } from './Icons';
-import { useToast } from '@/hooks/use-toast';
+import * as React from 'react'
+import { FC } from 'react'
+import { Button } from './ui/Button'
+import { cn } from '@/lib/utils'
+import { signIn } from 'next-auth/react'
+import { Icons } from './Icons'
+import { useToast } from '@/hooks/use-toast'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const { toast } = useToast();
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const { toast } = useToast()
 
   const loginWithGoogle = async () => {
-    setIsLoading(true);
+    setIsLoading(true)
 
     try {
-      await signIn('google');
+      await signIn('google')
     } catch (err) {
       // toast notification - TO BE IMPLEMENTED
       toast({
         title: 'Uh oh! Something went wrong.',
         description: 'There was an error logging in with Google',
         variant: 'destructive'
-      });
+      })
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <div className={cn('flex justify-center', className)} {...props}>
@@ -45,7 +45,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
         Google
       </Button>
     </div>
-  );
-};
+  )
+}
 
-export default UserAuthForm;
+export default UserAuthForm
