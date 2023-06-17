@@ -10,18 +10,17 @@ const SignIn: FC = () => {
         <Icons.logo className="mx-auto h-5 w-6" />
         <h1 className="text-2xl font-semibold tracking-tight">Welcome Back</h1>
         <p className="text-sm max-w-xs mx-auto">
-          By continuing, you are setting up an AppName account and agree to out
+          By continuing, you are setting up an Writeit account and agree to out
           User Agreement and Privacy Policy
         </p>
 
         <UserAuthForm />
 
         <p className="p-x-8 text-center text-sm text-zinc-700">
-          New to AppName?{' '}
+          New to Writeit?{' '}
           <Link
             href="/sign-up"
-            className="hover:text-zinc-800 text-sm underline underline-offset-4"
-          >
+            className="hover:text-zinc-800 text-sm underline underline-offset-4">
             Sign Up
           </Link>
         </p>

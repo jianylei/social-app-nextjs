@@ -1,6 +1,9 @@
-import { FC } from 'react'
-import { PageProps } from '../../../../.next/types/app/layout'
 import { getAuthSession } from '@/lib/auth'
+import { db } from '@/lib/db'
+import { PageProps } from '../../../../.next/types/app/layout'
+import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config'
+import { notFound } from 'next/navigation'
+import MiniCreatePost from '@/components/MiniCreatePost'
 
 interface pageProps {
   params: {
@@ -13,7 +16,33 @@ const page = async ({ params }: PageProps) => {
 
   const session = await getAuthSession()
 
-  return <div>page</div>
+  const subreddit = await db.subreddit.findFirst({
+    where: { name: slug },
+    include: {
+      posts: {
+        include: {
+          author: true,
+          votes: true,
+          comments: true,
+          subreddit: true
+        },
+
+        take: INFINITE_SCROLLING_PAGINATION_RESULTS
+      }
+    }
+  })
+
+  if (!subreddit) return notFound()
+
+  return (
+    <>
+      <h1 className="font-bold text-3xl md:text-4xl h-14">
+        r/{subreddit.name}
+      </h1>
+      <MiniCreatePost session={session} />
+      {/* TODO: Show posts in user feed */}
+    </>
+  )
 }
 
 export default page
