@@ -38,9 +38,9 @@ export async function POST(req: Request) {
         return new Response(subredditId)
     } catch (err) {
         if (err instanceof z.ZodError) {
-            return new Response(err.message, { status: 422 })
+            return new Response('Invalid request data passed', { status: 422 })
           }
       
-          return new Response('Could not create subreddit', { status: 500 })
+          return new Response('Could not subscribe, please try again later', { status: 500 })
     }
 }
