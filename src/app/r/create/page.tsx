@@ -30,7 +30,7 @@ const Page = () => {
       if (err instanceof AxiosError) {
         if (err.response?.status === 409) {
           return toast({
-            title: 'Subreddit already exists.',
+            title: 'Subreddit already exists',
             description: 'Please choose a different subreddit name.',
             variant: 'destructive'
           })
@@ -38,7 +38,7 @@ const Page = () => {
 
         if (err.response?.status === 422) {
           return toast({
-            title: 'Invalid subreddit name.',
+            title: 'Invalid subreddit name',
             description: 'Please choose a name between 3 and 21 characters.',
             variant: 'destructive'
           })
@@ -50,7 +50,7 @@ const Page = () => {
       }
 
       toast({
-        title: 'There was an error.',
+        title: 'There was an error',
         description: 'Could not create subreddit.',
         variant: 'destructive'
       })

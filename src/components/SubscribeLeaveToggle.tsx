@@ -41,7 +41,7 @@ const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
       }
 
       return toast({
-        title: 'There was a problem.',
+        title: 'There was a problem',
         description: 'Something went wrong, please try again.',
         variant: 'destructive'
       })
@@ -76,7 +76,7 @@ const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
       }
 
       return toast({
-        title: 'There was a problem.',
+        title: 'There was a problem',
         description: 'Something went wrong, please try again.',
         variant: 'destructive'
       })

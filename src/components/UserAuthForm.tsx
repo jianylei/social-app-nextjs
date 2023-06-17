@@ -22,7 +22,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     } catch (err) {
       // toast notification - TO BE IMPLEMENTED
       toast({
-        title: 'Uh oh! Something went wrong.',
+        title: 'Uh oh! Something went wrong',
         description: 'There was an error logging in with Google',
         variant: 'destructive'
       })
@@ -39,8 +39,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
         size="sm"
         isLoading={isLoading}
         onClick={loginWithGoogle}
-        disabled={isLoading}
-      >
+        disabled={isLoading}>
         {isLoading ? null : <Icons.google className="h-4 w-4 mr-2" />}
         Google
       </Button>
