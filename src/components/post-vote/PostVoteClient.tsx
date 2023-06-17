@@ -7,6 +7,8 @@ import { FC, useEffect, useState } from 'react'
 import { Button } from '../ui/Button'
 import { ArrowBigDown, ArrowBigUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useMutation } from '@tanstack/react-query'
+import { PostVoteRequest } from '@/lib/validators/vote'
 
 interface PostVoteClientProps {
   postId: string
@@ -27,6 +29,15 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
   useEffect(() => {
     setCurrentVote(initialVote)
   }, [initialVote])
+
+  const {} = useMutation({
+    mutationFn: async (voteType: VoteType) => {
+      const payload: PostVoteRequest = {
+        postId,
+        voteType
+      }
+    }
+  })
 
   return (
     <div className="flex sm:flex-col gap-4 sm:gap-0 pr-6 sm:w-20 pb-4 sm:pb-0">
