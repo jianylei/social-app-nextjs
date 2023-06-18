@@ -26,7 +26,6 @@ const Page = () => {
       return data as string
     },
     onError: (err) => {
-      console.log(err)
       if (err instanceof AxiosError) {
         if (err.response?.status === 409) {
           return toast({
