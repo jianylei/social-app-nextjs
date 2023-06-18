@@ -28,7 +28,7 @@ const Post: FC<PostProps> = ({
   const pRef = useRef<HTMLDivElement>(null)
 
   return (
-    <div className="rounded-md-bg-white shadow">
+    <div className="rounded-md bg-white shadow">
       <div className="px-6 py-4 flex justify-between">
         <PostVoteClient
           postId={post.id}
