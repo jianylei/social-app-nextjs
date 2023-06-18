@@ -8,7 +8,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList
-} from './ui/Command'
+} from '../ui/Command'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { Prisma, Subreddit } from '@prisma/client'

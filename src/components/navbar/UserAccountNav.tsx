@@ -8,8 +8,8 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from './ui/DropdownMenu'
-import UserAvatar from './UserAvatar'
+} from '../ui/DropdownMenu'
+import UserAvatar from '../UserAvatar'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 
@@ -66,8 +66,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
               callbackUrl: `${window.location.origin}/sign-in`
             })
           }}
-          className="cursor-pointer"
-        >
+          className="cursor-pointer">
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>

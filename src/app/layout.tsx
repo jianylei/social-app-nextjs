@@ -1,4 +1,4 @@
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/navbar/Navbar'
 import Providers from '@/components/Providers'
 import { Toaster } from '@/components/ui/Toaster'
 import { cn } from '@/lib/utils'
