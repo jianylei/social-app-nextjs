@@ -45,7 +45,6 @@ function CustomCodeRenderer({ data }: any) {
 }
 
 function CustomImageRenderer({ data }: any) {
-  console.log(data)
   const src = data.file.url
 
   return (
