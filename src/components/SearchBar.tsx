@@ -28,8 +28,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
   const {
     data: queryResults,
     refetch,
-    isFetched,
-    isFetching
+    isFetched
   } = useQuery({
     queryFn: async () => {
       if (!input) return []
@@ -48,6 +47,8 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
 
   const debounceRequest = useCallback(() => {
     request()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useOnClickOutside(commandRef, () => {
