@@ -77,7 +77,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
   return (
     <div className="flex sm:flex-col gap-4 sm:gap-0 pr-6 sm:w-20 pb-4 sm:pb-0">
       <Button
-        className="disabled:opacity-100 disabled:pointer-events-auto cursor-pointer"
+        className="disabled:opacity-100"
         size="sm"
         variant="ghost"
         aria-label="upvote"
@@ -95,7 +95,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
       </p>
 
       <Button
-        className="disabled:opacity-100 disabled:pointer-events-auto cursor-pointer"
+        className="disabled:opacity-100"
         size="sm"
         variant="ghost"
         aria-label="downvote"
