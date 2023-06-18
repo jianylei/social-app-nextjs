@@ -2,7 +2,7 @@ import { FC } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/Button'
-import SignIn from '@/components/SignIn'
+import SignIn from '@/components/auth/SignIn'
 import { ChevronLeft } from 'lucide-react'
 
 const page: FC = () => {
@@ -14,8 +14,7 @@ const page: FC = () => {
           className={cn(
             buttonVariants({ variant: 'ghost' }),
             'self-start -mt-20'
-          )}
-        >
+          )}>
           <ChevronLeft className="mr-2 h-4 w-4" />
           Home
         </Link>
