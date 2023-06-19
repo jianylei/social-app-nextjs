@@ -5,7 +5,7 @@ export async function GET(req: Request) {
     const href = url.searchParams.get('url')
 
     if (!href) {
-        return new Response('Invalid hred', { status: 400 })
+        return new Response('Invalid href', { status: 400 })
     }
 
     const res = await axios.get(href)
@@ -25,7 +25,7 @@ export async function GET(req: Request) {
         JSON.stringify({
             success: 1,
             meta: {
-                title,
+                title: title ? title : href,
                 description,
                 image: {
                     url: imageUrl
