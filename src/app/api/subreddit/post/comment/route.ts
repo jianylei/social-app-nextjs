@@ -1,6 +1,7 @@
 import { getAuthSession } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { CommentValidator } from "@/lib/validators/comment"
+import { VoteType } from "@prisma/client"
 import { z } from "zod"
 
 export async function PATCH(req: Request) {
@@ -15,12 +16,20 @@ export async function PATCH(req: Request) {
             return new Response('Unauthorized', { status: 401 })
         }
 
-        await db.comment.create({
+        const { id: commentId } = await db.comment.create({
             data: {
                 text,
                 postId,
                 authorId: session.user.id,
                 replyToId
+            }
+        })
+
+        await db.commentVote.create({
+            data: {
+                type: VoteType.UP,
+                userId: session.user.id,
+                commentId
             }
         })
 

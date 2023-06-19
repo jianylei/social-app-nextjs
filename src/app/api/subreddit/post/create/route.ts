@@ -1,6 +1,7 @@
 import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { PostValidator } from '@/lib/validators/post'
+import { VoteType } from '@prisma/client'
 import { z } from 'zod'
 
 export async function POST(req: Request) {
@@ -22,16 +23,24 @@ export async function POST(req: Request) {
     })
 
     if (!alreadyExist) {
-      return new Response('Subreddit to post', { status: 400 })
+      return new Response('Subscribe to post', { status: 400 })
     }
 
-    await db.post.create({
+    const { id: postId } = await db.post.create({
         data: {
             title,
             content,
             authorId: session.user.id,
             subredditId
         },
+    })
+
+    await db.vote.create({
+      data: {
+        type: VoteType.UP,
+        userId: session.user.id,
+        postId
+      }
     })
 
     return new Response('OK')
