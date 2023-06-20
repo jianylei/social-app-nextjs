@@ -15,11 +15,8 @@ import { useMutation } from '@tanstack/react-query'
 import { CommentRequest } from '@/lib/validators/comment'
 import axios from 'axios'
 import { toast } from '@/hooks/use-toast'
-
-type ExtendedComment = Comment & {
-  votes: CommentVote[]
-  author: User
-}
+import CommentMoreOptions from './CommentMoreOptions'
+import { ExtendedComment } from '@/types/db'
 
 interface PostCommentProps {
   comment: ExtendedComment
@@ -106,6 +103,9 @@ const PostComment: FC<PostCommentProps> = ({
           Reply
         </Button>
 
+        {session?.user.id === comment.authorId ? (
+          <CommentMoreOptions commentId={comment.id} />
+        ) : null}
         {isReplying ? (
           <div className="grid w-full gap-1.5">
             <Label htmlFor="comment">Your comment</Label>
