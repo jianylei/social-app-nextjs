@@ -1,13 +1,12 @@
-import { ExtendedComment } from '@/types/db'
-import { FC } from 'react'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from './ui/DropdownMenu'
+import { toast } from '@/hooks/use-toast'
+import { RemoveCommentRequest } from '@/lib/validators/comment'
+import { DialogClose } from '@radix-ui/react-dialog'
+import { useMutation } from '@tanstack/react-query'
+import axios, { AxiosError } from 'axios'
 import { MoreHorizontal } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { FC } from 'react'
+import { Button, buttonVariants } from './ui/Button'
 import {
   Dialog,
   DialogContent,
@@ -17,13 +16,13 @@ import {
   DialogTitle,
   DialogTrigger
 } from './ui/Dialog'
-import { Button, buttonVariants } from './ui/Button'
-import { useMutation } from '@tanstack/react-query'
-import { RemoveCommentRequest } from '@/lib/validators/comment'
-import axios, { AxiosError } from 'axios'
-import { toast } from '@/hooks/use-toast'
-import { DialogClose } from '@radix-ui/react-dialog'
-import { useRouter } from 'next/navigation'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from './ui/DropdownMenu'
 
 interface CommentMoreOptionsProps {
   commentId: string
@@ -32,19 +31,22 @@ interface CommentMoreOptionsProps {
 const CommentMoreOptions: FC<CommentMoreOptionsProps> = ({ commentId }) => {
   const router = useRouter()
 
-  const { mutate: deleteComment, isLoading } = useMutation({
+  const {
+    mutate: deleteComment,
+    isLoading,
+    isSuccess
+  } = useMutation({
     mutationFn: async ({ commentId }: RemoveCommentRequest) => {
       const payload: RemoveCommentRequest = {
         commentId
       }
 
-      const { data } = await axios.delete('/api/subreddit/post/comment', {
-        data: payload
-      })
+      const { data } = await axios.delete(
+        `/api/subreddit/post/comment/${commentId}`
+      )
       return data
     },
     onError: (err) => {
-      console.log('errr')
       if (err instanceof AxiosError) {
         if (err.response?.status === 401) {
           return loginToast()
@@ -75,7 +77,11 @@ const CommentMoreOptions: FC<CommentMoreOptionsProps> = ({ commentId }) => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem>
-              <DialogTrigger className="w-full text-left">Delete</DialogTrigger>
+              <DialogTrigger
+                disabled={isLoading || isSuccess}
+                className="w-full text-left">
+                Delete
+              </DialogTrigger>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
