@@ -1,3 +1,5 @@
+'use client'
+
 import { toast } from '@/hooks/use-toast'
 import { RemoveCommentRequest } from '@/lib/validators/comment'
 import { DialogClose } from '@radix-ui/react-dialog'
@@ -49,7 +51,11 @@ const CommentMoreOptions: FC<CommentMoreOptionsProps> = ({ commentId }) => {
     onError: (err) => {
       if (err instanceof AxiosError) {
         if (err.response?.status === 401) {
-          return loginToast()
+          return toast({
+            title: 'Unauthorized',
+            description: 'You can only delete comments that you have created.',
+            variant: 'destructive'
+          })
         }
       }
 
@@ -65,59 +71,54 @@ const CommentMoreOptions: FC<CommentMoreOptionsProps> = ({ commentId }) => {
   })
 
   return (
-    <div>
-      <Dialog>
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            className={buttonVariants({
-              variant: 'ghost',
-              size: 'xs'
-            })}>
-            <MoreHorizontal className="h-5 w-5" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>
-              <DialogTrigger
-                disabled={isLoading || isSuccess}
-                className="w-full text-left">
-                Delete
-              </DialogTrigger>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+    <Dialog>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          className={buttonVariants({
+            variant: 'ghost',
+            size: 'xs'
+          })}>
+          <MoreHorizontal className="h-5 w-5" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>
+            <DialogTrigger
+              disabled={isLoading || isSuccess}
+              className="w-full text-left">
+              Delete
+            </DialogTrigger>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
 
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Delete comment</DialogTitle>
-            <DropdownMenuSeparator />
-            <DialogDescription className="py-3">
-              Are you sure you want to delete your comment?
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button isLoading={isLoading} variant="subtle">
-                Keep
-              </Button>
-            </DialogClose>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete comment</DialogTitle>
+          <DropdownMenuSeparator />
+          <DialogDescription className="py-3">
+            Are you sure you want to delete your comment?
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose asChild className="mt-2 sm:mt-0">
+            <Button isLoading={isLoading} variant="subtle">
+              Keep
+            </Button>
+          </DialogClose>
 
-            <DialogClose asChild>
-              <Button
-                isLoading={isLoading}
-                onClick={() => {
-                  deleteComment({ commentId })
-                }}>
-                Delete
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </div>
+          <DialogClose asChild>
+            <Button
+              isLoading={isLoading}
+              onClick={() => {
+                deleteComment({ commentId })
+              }}>
+              Delete
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
 
 export default CommentMoreOptions
-function loginToast(): unknown {
-  throw new Error('Function not implemented.')
-}

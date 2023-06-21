@@ -1,5 +1,6 @@
 import CommentSection from '@/components/CommentSection'
 import EditorOutput from '@/components/EditorOutput'
+import PostMoreOptions from '@/components/PostMoreOptions'
 import PostVoteServer from '@/components/post-vote/PostVoteServer'
 import { buttonVariants } from '@/components/ui/Button'
 import { db } from '@/lib/db'
@@ -67,11 +68,14 @@ const page = async ({ params }: pageProps) => {
             Posted by u/{post?.author.username ?? cachedPost.authorUsername}{' '}
             {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
           </p>
-          <h1 className="text-xl font-semibold py-2 leading-6 text-gray-900">
+          <h1 className="text-xl font-semibold py-2 leading-6 text-gray-900 mb-5">
             {post?.title ?? cachedPost.title}
           </h1>
-
           <EditorOutput content={post?.content ?? cachedPost.content} />
+
+          <div className="mt-8">
+            <PostMoreOptions postId={post?.id ?? cachedPost.id} />
+          </div>
 
           <Suspense
             fallback={

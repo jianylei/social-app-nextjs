@@ -28,8 +28,8 @@ const CommentSection = async ({ postId }: CommentSectionProps) => {
   })
 
   return (
-    <div className="flex flex-col gap-y-4 mt-4">
-      <hr className="w-full h-px my-6" />
+    <div className="flex flex-col gap-y-4">
+      <hr className="w-full h-px mb-6 mt-1" />
 
       <CreateComment postId={postId} />
 
@@ -65,8 +65,8 @@ const CommentSection = async ({ postId }: CommentSectionProps) => {
                 {topLevelComment.replies
                   .sort(
                     (a, b) =>
-                      new Date(b.createdAt).getTime() -
-                      new Date(a.createdAt).getTime()
+                      new Date(a.createdAt).getTime() -
+                      new Date(b.createdAt).getTime()
                   )
                   .map((reply) => {
                     const replyVotesAmt = reply.votes.reduce((acc, vote) => {
