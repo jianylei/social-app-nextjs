@@ -3,6 +3,7 @@ import EditorOutput from '@/components/EditorOutput'
 import PostMoreOptions from '@/components/PostMoreOptions'
 import PostVoteServer from '@/components/post-vote/PostVoteServer'
 import { buttonVariants } from '@/components/ui/Button'
+import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { redis } from '@/lib/redis'
 import { formatTimeToNow } from '@/lib/utils'
@@ -10,6 +11,7 @@ import { CachedPost } from '@/types/redis'
 import { Post, User, Vote } from '@prisma/client'
 import { ArrowBigDown } from 'lucide-react'
 import { ArrowBigUp, Loader2 } from 'lucide-react'
+import { useSession } from 'next-auth/react'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
@@ -23,6 +25,8 @@ export const dynamic = 'force-dynamic'
 export const fetchCache = 'force-no-store'
 
 const page = async ({ params }: pageProps) => {
+  const session = await getAuthSession()
+
   const cachedPost = (await redis.hgetall(
     `post:${params.postId}`
   )) as CachedPost
@@ -71,11 +75,14 @@ const page = async ({ params }: pageProps) => {
           <h1 className="text-xl font-semibold py-2 leading-6 text-gray-900 mb-5">
             {post?.title ?? cachedPost.title}
           </h1>
-          <EditorOutput content={post?.content ?? cachedPost.content} />
 
-          <div className="mt-8">
-            <PostMoreOptions postId={post?.id ?? cachedPost.id} />
+          <div className="mb-8">
+            <EditorOutput content={post?.content ?? cachedPost.content} />
           </div>
+
+          {session?.user.id === post?.authorId ? (
+            <PostMoreOptions postId={post?.id ?? cachedPost.id} />
+          ) : null}
 
           <Suspense
             fallback={
