@@ -104,7 +104,7 @@ const PostComment: FC<PostCommentProps> = ({
           Reply
         </Button>
 
-        {session?.user.id === comment.authorId ? (
+        {session && session?.user.id === comment.authorId ? (
           <CommentMoreOptions commentId={comment.id} />
         ) : null}
         {isReplying ? (

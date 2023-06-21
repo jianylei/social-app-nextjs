@@ -80,7 +80,7 @@ const page = async ({ params }: pageProps) => {
             <EditorOutput content={post?.content ?? cachedPost.content} />
           </div>
 
-          {session?.user.id === post?.authorId ? (
+          {session && session?.user.id === post?.authorId ? (
             <PostMoreOptions postId={post?.id ?? cachedPost.id} />
           ) : null}
 
