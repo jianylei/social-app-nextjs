@@ -59,6 +59,7 @@ const PostComment: FC<PostCommentProps> = ({
     onSuccess: () => {
       router.refresh()
       setIsReplying(false)
+      setInput('')
     }
   })
 
