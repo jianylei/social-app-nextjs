@@ -1,6 +1,6 @@
 import { getAuthSession } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { CommentValidator, RemoveCommentValidator } from "@/lib/validators/comment"
+import { CommentValidator } from "@/lib/validators/comment"
 import { VoteType } from "@prisma/client"
 import { z } from "zod"
 

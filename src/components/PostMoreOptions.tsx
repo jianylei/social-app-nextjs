@@ -24,7 +24,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from './ui/DropdownMenu'
-import { PostDeleteRequest } from '@/lib/validators/post'
 
 interface PostMoreOptionsProps {
   postId: string
@@ -39,11 +38,7 @@ const PostMoreOptions: FC<PostMoreOptionsProps> = ({ postId }) => {
     isLoading,
     isSuccess
   } = useMutation({
-    mutationFn: async ({ postId }: PostDeleteRequest) => {
-      const payload: PostDeleteRequest = {
-        postId
-      }
-
+    mutationFn: async (postId: string) => {
       const { data } = await axios.delete(`/api/subreddit/post/${postId}`)
       return data
     },
@@ -100,7 +95,7 @@ const PostMoreOptions: FC<PostMoreOptionsProps> = ({ postId }) => {
           <DialogTitle>Delete post?</DialogTitle>
           <DropdownMenuSeparator />
           <DialogDescription className="py-3">
-            Are you sure you want to delete your post? You can't undo this.
+            Are you sure you want to delete your post? You can{"'"}t undo this.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -114,7 +109,7 @@ const PostMoreOptions: FC<PostMoreOptionsProps> = ({ postId }) => {
             <Button
               isLoading={isLoading}
               onClick={() => {
-                deletePost({ postId })
+                deletePost(postId)
               }}>
               Delete Post
             </Button>

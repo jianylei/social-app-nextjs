@@ -1,7 +1,6 @@
 'use client'
 
 import { toast } from '@/hooks/use-toast'
-import { RemoveCommentRequest } from '@/lib/validators/comment'
 import { DialogClose } from '@radix-ui/react-dialog'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
@@ -38,11 +37,7 @@ const CommentMoreOptions: FC<CommentMoreOptionsProps> = ({ commentId }) => {
     isLoading,
     isSuccess
   } = useMutation({
-    mutationFn: async ({ commentId }: RemoveCommentRequest) => {
-      const payload: RemoveCommentRequest = {
-        commentId
-      }
-
+    mutationFn: async (commentId: string) => {
       const { data } = await axios.delete(
         `/api/subreddit/post/comment/${commentId}`
       )
@@ -110,7 +105,7 @@ const CommentMoreOptions: FC<CommentMoreOptionsProps> = ({ commentId }) => {
             <Button
               isLoading={isLoading}
               onClick={() => {
-                deleteComment({ commentId })
+                deleteComment(commentId)
               }}>
               Delete
             </Button>
