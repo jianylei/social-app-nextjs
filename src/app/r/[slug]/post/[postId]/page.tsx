@@ -11,7 +11,6 @@ import { CachedPost } from '@/types/redis'
 import { Post, User, Vote } from '@prisma/client'
 import { ArrowBigDown } from 'lucide-react'
 import { ArrowBigUp, Loader2 } from 'lucide-react'
-import { useSession } from 'next-auth/react'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
